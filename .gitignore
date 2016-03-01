@@ -1,3 +1,27 @@
+# Unreal Files
+
+Binaries
+DerivedDataCache
+Intermediate
+Saved
+*.opensdf
+*.sdf
+*.sln
+*.suo
+*.xcodeproj
+*.xcworkspace
+FPSRTSPrototype/Content/StarterContent/
+FPSRTSPrototype/Content/Characters/
+FPSRTSPrototype/Content/Animations/
+FPSRTSPrototype/Content/Effects/
+FPSRTSPrototype/Content/Environment/
+FPSRTSPrototype/Content/FirstPerson/
+FPSRTSPrototype/Content/FirstPersonCPP/
+FPSRTSPrototype/Content/Geometry/
+FPSRTSPrototype/Content/Sounds/
+FPSRTSPrototype/Content/Weapons/
+FPSRTSPrototype/Content/Collections/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
