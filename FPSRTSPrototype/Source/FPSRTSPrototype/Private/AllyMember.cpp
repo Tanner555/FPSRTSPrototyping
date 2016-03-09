@@ -25,6 +25,7 @@ void AAllyMember::BeginPlay() {
 	if (gamemode == nullptr) {
 		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Blue, "RTS GameMode does not exist!");
 	}
+
 }
 
 void AAllyMember::Tick(float DeltaTime) {
@@ -44,22 +45,22 @@ void AAllyMember::Tick(float DeltaTime) {
 float AAllyMember::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) {
 	const float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 		addAllyHealth(-Damage);
-		if (AllyHealth <= 0) {
+		if (AllyHealth <= 0) { //Ally is dead
+			//handle visual cue for death scenario
 			if (deathSparks != nullptr && deathSound != nullptr) {
 				UGameplayStatics::SpawnEmitterAtLocation(this, deathSparks, this->GetActorLocation(), FRotator::ZeroRotator, true);
 				UGameplayStatics::PlaySoundAtLocation(this, deathSound, this->GetActorLocation());
 			}
+			//if gamemode, find allies and exclude this ally
 			if (gamemode != nullptr) {
 				for (int i = 0; i < gamemode->GeneralMembers.Num();i++) {
 					if (gamemode->GeneralMembers[i]->generalCommander.operator==(generalCommander.GetValue())) {
 						AAllyMember* firstally = gamemode->GeneralMembers[i]->FindPartyMembers(true, this);
 						if (firstally != nullptr){
 							gamemode->GeneralMembers[i]->SetAllyInCommand(firstally);
-							Destroy(false, true);
 						}
 						else {
 							//gamemode->CallGameOverEvent(generalCommander);
-							Destroy(false, true);
 						}
 					}
 					//Add to death count
@@ -82,11 +83,18 @@ float AAllyMember::TakeDamage(float Damage, struct FDamageEvent const& DamageEve
 							int32 givePunishment = gamemode->GetPendingPunishment(enemyAlly, friendlyPunishment);
 							enemyAlly->AddToPointsScored(givePunishment);
 						}
+						//Handle targetting for enemy
+						enemyAlly->isTargetingEnemy = false;
 					}
 				}
 				//Update GameModeStats in the end
 				gamemode->UpdateGameModeStats();
 			}
+			//Handle actor being destroyed
+			if (this->GetController())
+				this->GetController()->Destroy(false, true);
+
+			Destroy(false, true);
 		}
 	return ActualDamage;
 }
@@ -213,6 +221,10 @@ bool AAllyMember::isEnemyFor(AAllyMember* player) {
 	else {
 		return true;
 	}
+}
+
+bool AAllyMember::isTargettingEnemy() {
+	return true;
 }
 
 bool AAllyMember::wantsFreeMovement() const { return wantsFreedomToMove; }

@@ -71,6 +71,13 @@ public:
 		TArray<TEnumAsByte<ECommanders>> EnemyFaction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = GameModeSetup)
 		TArray<TSubclassOf<class ARTSSpectator>> Spectators;
+	//Spawning Blueprints in GameMode
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = SpawningSetup)
+		AActor* FactionSpawner;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = SpawningSetup)
+		TSubclassOf<class AAllyMember> AlliesSpawnClass;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = SpawningSetup)
+		TSubclassOf<class AAllyMember> EnemiesSpawnClass;
 	//ReadOnly
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = GameModeSetup)
 		TArray<AActor*> GeneralActors;
@@ -107,8 +114,14 @@ public:
 	ARTSProtoGameMode();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION(BlueprintCallable,Category = GameModeSetup)
+	//GameModeSpawning Function
+	UFUNCTION(BlueprintCallable, Category = SpawningFactionMembers)
+	void SpawnAlliesMembers();
+	UFUNCTION(BlueprintCallable, Category = SpawningFactionMembers)
+	void SpawnEnemiesMembers();
+	
+	//GameModeSetup Functions
+	UFUNCTION(BlueprintCallable, Category = GameModeSetup)
 	class APartyManagerCPP* FindGenerals(bool pendingLeave, class APartyManagerCPP* generalLeaving);
 	UFUNCTION(BlueprintCallable, Category = GameModeSetup)
 	void SetGeneralInCommand(class APartyManagerCPP* setToCommand);

@@ -224,7 +224,7 @@ void  APartyManagerCPP::SetAllyInCommand(AAllyMember* setToCommand) {
 	void APartyManagerCPP::PossessAllyAdd() {
 		AAllyMember* isAnAlly = Cast<AAllyMember>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 		if (isAnAlly == nullptr) {
-			if (allyInCommand) {
+			if (allyInCommand && PartyMembers.Num() > 0) {
 				int32 commandIndex = PartyMembers.Find(allyInCommand);
 				//Unreal Crashes when I increment int32 by ++ instead of +1
 				//Unreal Crashes when I check array for nullpointers
@@ -237,12 +237,12 @@ void  APartyManagerCPP::SetAllyInCommand(AAllyMember* setToCommand) {
 				}
 			}
 		}
-
+		
 	}
 	void APartyManagerCPP::PossessAllySubtract() {
 		AAllyMember* isAnAlly = Cast<AAllyMember>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 		if (isAnAlly == nullptr) {
-			if (allyInCommand) {
+			if (allyInCommand && PartyMembers.Num() > 0) {
 				int32 commandIndex = PartyMembers.Find(allyInCommand);
 				int32 endIndex = PartyMembers.Find(PartyMembers[PartyMembers.Num() - 1]);
 				//Unreal Crashes when I increment int32 by ++ instead of +1

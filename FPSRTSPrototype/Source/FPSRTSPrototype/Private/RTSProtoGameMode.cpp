@@ -53,8 +53,21 @@ void ARTSProtoGameMode::Tick(float DeltaTime) {
 	else if (GetMatchState().operator==(ERTSGameState::EPlaying)) {
 		playTheMatch();
 	}
+	
+	
 }
 
+//Spawning Functions
+void ARTSProtoGameMode::SpawnAlliesMembers() {
+	
+
+}
+
+void ARTSProtoGameMode::SpawnEnemiesMembers() {
+	
+}
+
+//GameModeSetupFunctions
 APartyManagerCPP* ARTSProtoGameMode::FindGenerals(bool pendingLeave, class APartyManagerCPP* generalLeaving) {
 	GeneralActors.Empty();
 	GeneralMembers.Empty();

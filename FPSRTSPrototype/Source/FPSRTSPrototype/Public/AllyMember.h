@@ -97,6 +97,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "AllyAttribute")
 		bool isEnemyFor(AAllyMember* player);
 	UFUNCTION(BlueprintCallable, Category = "AllyAttribute")
+		bool isTargettingEnemy();
+	UFUNCTION(BlueprintCallable, Category = "AllyAttribute")
 		bool wantsFreeMovement() const;
 	UFUNCTION(BlueprintCallable, Category = "AllyAttribute")
 		void toggleFreeMovement();
