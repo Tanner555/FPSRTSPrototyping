@@ -114,12 +114,7 @@ public:
 	ARTSProtoGameMode();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	//GameModeSpawning Function
-	UFUNCTION(BlueprintCallable, Category = SpawningFactionMembers)
-	void SpawnAlliesMembers();
-	UFUNCTION(BlueprintCallable, Category = SpawningFactionMembers)
-	void SpawnEnemiesMembers();
-	
+
 	//GameModeSetup Functions
 	UFUNCTION(BlueprintCallable, Category = GameModeSetup)
 	class APartyManagerCPP* FindGenerals(bool pendingLeave, class APartyManagerCPP* generalLeaving);

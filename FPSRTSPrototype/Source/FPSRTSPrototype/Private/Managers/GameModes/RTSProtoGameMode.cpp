@@ -23,7 +23,7 @@ void ARTSProtoGameMode::BeginPlay() {
 	}
 	else {
 		for (int i = 0; i < GeneralMembers.Num(); i++) {
-			if (GeneralMembers[i]->generalCommander == ECommanders::Commander_01) {
+			if (GeneralMembers[i]->generalCommander.operator==(ECommanders::Commander_01)) {
 				SetGeneralInCommand(GeneralMembers[i]);
 			}
 		}
@@ -54,16 +54,6 @@ void ARTSProtoGameMode::Tick(float DeltaTime) {
 		playTheMatch();
 	}
 	
-	
-}
-
-//Spawning Functions
-void ARTSProtoGameMode::SpawnAlliesMembers() {
-	
-
-}
-
-void ARTSProtoGameMode::SpawnEnemiesMembers() {
 	
 }
 
